@@ -6,13 +6,28 @@ class LinkedList
   end
 
   def append(value)
+    current_node = @head
+
+    if current_node
+      while current_node.next_node do
+        current_node = current_node.next_node
+      end 
+    else
+      current_node = Node.new(value)
+    end
+    current_node.next_node = Node.new(value)
+  end
+
+  def prepend(value)
     if @head
-      @head.next_node = Node.new(value)
+      front = Node.new(value)
+      front.next_node = @head
+      @head = front
     else
       @head = Node.new(value)
     end
   end
-  
+
 end
 
 # Node class
@@ -28,9 +43,15 @@ end
 
 list = LinkedList.new
 p list
-
-p list.append(11)
-
+puts ''
+p list.prepend(44)
 p list
+puts ''
+p list.append(11)
+p list
+puts ''
 p list.append(22)
+p list
+puts ''
+p list.prepend(33)
 p list
